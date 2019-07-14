@@ -46,6 +46,10 @@ class VehicleModel(db.Model):
     def get_one_vehicle(id):
         return VehicleModel.query.get(id)
 
+    @staticmethod
+    def get_driver_id(driver_id):
+        return VehicleModel.query.get(driver_id)
+
     def __repr(self):
         return '<id {}>'.format(self.id)
 

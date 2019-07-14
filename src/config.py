@@ -8,5 +8,6 @@ class Development(object):
 
 
 app_config = {
-    'development': Development
+    'development': Development,
+    'default': Development
 }

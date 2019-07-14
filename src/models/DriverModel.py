@@ -48,11 +48,15 @@ class DriverModel(db.Model):
     def get_one_driver(id):
         return DriverModel.query.get(id)
 
+    @staticmethod
+    def get_driver_by_name(name):
+        return DriverModel.query.filter(DriverModel.name == name).all()
+
     def __repr(self):
         return '<id {}>'.format(self.id)
 
 
-class UserSchema(Schema):
+class DriverSchema(Schema):
     id = fields.Int(dump_only=True)
     vehicle = fields.Nested(VehicleSchema, many=True)
     route = fields.Nested(RouteSchema, many=True)
