@@ -50,6 +50,8 @@ class VehicleModel(db.Model):
     def get_driver_id(driver_id):
         return VehicleModel.query.get(driver_id)
 
+    # TODO: create a method to count how many loaded trucks pass by the terminal by day, week and month.
+
     def __repr(self):
         return '<id {}>'.format(self.id)
 

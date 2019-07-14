@@ -10,7 +10,6 @@ app = create_app(env_name)
 
 migrate = Migrate(app=app, db=db)
 
-
 manager = Manager(app=app)
 
 manager.add_command('db', MigrateCommand)

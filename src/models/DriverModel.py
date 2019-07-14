@@ -51,6 +51,8 @@ class DriverModel(db.Model):
     @staticmethod
     def get_driver_by_name(name):
         return DriverModel.query.filter(DriverModel.name == name).all()
+    
+    # TODO: create a method to check all drivers that doesn't have a loaded truck to go back to his origen.
 
     def __repr(self):
         return '<id {}>'.format(self.id)
