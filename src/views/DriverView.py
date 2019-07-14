@@ -34,6 +34,14 @@ def get(driver_id):
     return custom_response(response, 200)
 
 
+@driver_api.route('/list', methods=['GET'])
+def get_all():
+    driver = DriverModel.list_drivers_truck_is_not_loaded()
+
+    response = driver_schema.dump(driver, many=True).data
+    return custom_response(response, 200)
+
+
 @driver_api.route('/<int:driver_id>', methods=['PUT'])
 def update(driver_id):
     req_data = request.get_json()

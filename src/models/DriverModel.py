@@ -1,7 +1,7 @@
 import datetime
 from . import db
 from marshmallow import fields, Schema
-from .VehicleModel import VehicleSchema
+from .VehicleModel import VehicleSchema, VehicleModel
 from .RouteModel import RouteSchema
 
 
@@ -51,8 +51,13 @@ class DriverModel(db.Model):
     @staticmethod
     def get_driver_by_name(name):
         return DriverModel.query.filter(DriverModel.name == name).all()
-    
-    # TODO: create a method to check all drivers that doesn't have a loaded truck to go back to his origen.
+
+    @staticmethod
+    def list_drivers_truck_is_not_loaded():
+        return db.session.query(DriverModel.id, DriverModel.name)\
+                               .join(VehicleModel, DriverModel.id == VehicleModel.driver_id)\
+                               .filter(VehicleModel.is_loaded == False)\
+                               .all()
 
     def __repr(self):
         return '<id {}>'.format(self.id)

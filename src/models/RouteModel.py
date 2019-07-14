@@ -46,7 +46,7 @@ class RouteModel(db.Model):
     def get_one_route(id):
         return RouteModel.query.get(id)
 
-    # TODO create a method to group origen and destination separatelly
+    # TODO create a method to group origin and destination separatelly.
 
     def __repr(self):
         return '<id {}>'.format(self.id)
