@@ -1,8 +1,10 @@
 import datetime
 from . import db
+
 from marshmallow import fields, Schema
-from .VehicleModel import VehicleSchema, VehicleModel
+
 from .RouteModel import RouteSchema
+from .VehicleModel import VehicleSchema, VehicleModel
 
 
 class DriverModel(db.Model):
@@ -53,11 +55,17 @@ class DriverModel(db.Model):
         return DriverModel.query.filter(DriverModel.name == name).all()
 
     @staticmethod
-    def list_drivers_truck_is_not_loaded():
-        return db.session.query(DriverModel.id, DriverModel.name)\
-                               .join(VehicleModel, DriverModel.id == VehicleModel.driver_id)\
-                               .filter(VehicleModel.is_loaded == False)\
-                               .all()
+    def truck_not_loaded():
+        return db.session.query(DriverModel.id, DriverModel.name) \
+            .join(VehicleModel, DriverModel.id == VehicleModel.driver_id) \
+            .filter(VehicleModel.is_loaded.is_(False))
+
+    @staticmethod
+    def truck_owned():
+        return db.session.query(DriverModel.id, DriverModel.name) \
+            .join(VehicleModel, DriverModel.id == VehicleModel.driver_id) \
+            .filter(VehicleModel.own_vehicle.is_(True))\
+            .order_by(DriverModel.id.asc())
 
     def __repr(self):
         return '<id {}>'.format(self.id)

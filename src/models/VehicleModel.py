@@ -1,5 +1,6 @@
 import datetime
 from . import db
+from datetime import date
 from marshmallow import fields, Schema
 
 
@@ -50,7 +51,12 @@ class VehicleModel(db.Model):
     def get_driver_id(driver_id):
         return VehicleModel.query.get(driver_id)
 
-    # TODO: create a method to count how many loaded trucks pass by the terminal by day, week and month.
+    @staticmethod
+    def get_trucks_today():
+        return db.session.query(VehicleModel). \
+            filter(db.cast(VehicleModel.created_at, db.Date) == date.today()).all()
+
+    # TODO: create a method to count how many loaded trucks pass by the terminal by week and month.
 
     def __repr(self):
         return '<id {}>'.format(self.id)

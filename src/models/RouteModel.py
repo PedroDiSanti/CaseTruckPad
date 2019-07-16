@@ -46,7 +46,15 @@ class RouteModel(db.Model):
     def get_one_route(id):
         return RouteModel.query.get(id)
 
-    # TODO create a method to group origin and destination separatelly.
+    @staticmethod
+    def list_origin():
+        return db.session.query(RouteModel.origin_latitude, RouteModel.origin_longitude) \
+            .order_by(RouteModel.origin_latitude, RouteModel.origin_longitude)
+
+    @staticmethod
+    def list_destination():
+        return db.session.query(RouteModel.destination_latitude, RouteModel.destination_longitude) \
+            .order_by(RouteModel.destination_latitude, RouteModel.destination_longitude)
 
     def __repr(self):
         return '<id {}>'.format(self.id)

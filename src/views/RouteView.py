@@ -19,6 +19,22 @@ def create():
     return custom_response(data, 201)
 
 
+@route_api.route('/list_origin', methods=['GET'])
+def list_origin():
+    origin = RouteModel.list_origin()
+
+    response = route_schema.dump(origin, many=True).data
+    return custom_response(response, 200)
+
+
+@route_api.route('/list_destination', methods=['GET'])
+def list_destination():
+    destination = RouteModel.list_destination()
+
+    response = route_schema.dump(destination, many=True).data
+    return custom_response(response, 200)
+
+
 def custom_response(res, status_code):
     return Response(
         mimetype="application/json",

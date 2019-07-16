@@ -34,9 +34,24 @@ def get(driver_id):
     return custom_response(response, 200)
 
 
-@driver_api.route('/list', methods=['GET'])
-def get_all():
-    driver = DriverModel.list_drivers_truck_is_not_loaded()
+@driver_api.route('/list_loaded', methods=['GET'])
+def list_truck_not_loaded():
+    driver = DriverModel.truck_not_loaded()
+
+    response = driver_schema.dump(driver, many=True).data
+    return custom_response(response, 200)
+
+
+@driver_api.route('/list_owned', methods=['GET'])
+def list_truck_owned():
+    driver = DriverModel.truck_owned()
+
+    # count = 0
+    # drivers = DriverModel.truck_not_loaded()
+    # for _ in drivers:
+        # count += 1
+    # driver = str(count)
+    # return driver
 
     response = driver_schema.dump(driver, many=True).data
     return custom_response(response, 200)
