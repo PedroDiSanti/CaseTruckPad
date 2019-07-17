@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "c33869b9-3728-440b-aeb6-9dfe25e8ce20",
+		"name": "PythonApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "Create driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Pedro Di Santi\",\n\t\"age\": 25,\n\t\"sex\": \"Male\",\n\t\"cnh\": \"A\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/drivers/",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"drivers",
+								""
+							]
+						},
+						"description": "Route to create a driver based on its id."
+					},
+					"response": []
+				},
+				{
+					"name": "Get driver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/drivers/1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"drivers",
+								"1"
+							]
+						},
+						"description": "Route to get a driver based on its id."
+					},
+					"response": []
+				},
+				{
+					"name": "Update driver",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Pedro Dos Santos\",\n\t\"age\": 27,\n\t\"sex\": \"Male\",\n\t\"cnh\": \"B\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/drivers/1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"drivers",
+								"1"
+							]
+						},
+						"description": "Route to update a driver based on its id."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete driver",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/drivers/1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"drivers",
+								"1"
+							]
+						},
+						"description": "Route to delete a driver based on its id."
+					},
+					"response": []
+				},
+				{
+					"name": "List drivers with vehicles not loaded",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/drivers/list_not_loaded",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"drivers",
+								"list_not_loaded"
+							]
+						},
+						"description": "A route to get a list of id and name from the drivers that doesn't have a truck loaded."
+					},
+					"response": []
+				},
+				{
+					"name": "List drivers with vehicles owned",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/drivers/list_trucks_owned",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"drivers",
+								"list_trucks_owned"
+							]
+						},
+						"description": "A route to get a list of id and name from the drivers that own a truck."
+					},
+					"response": []
+				}
+			],
+			"description": "Drivers route's collection.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "96617d0b-26d7-40d9-bab4-50bfd21e7762",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7f4ca9d8-1e7e-4aab-a57e-21cf8724a39b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Create vehicle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"driver_id\": 3,\n\t\"name\": \"Caminhão 3/4\",\n\t\"is_loaded\": 1,\n\t\"own_vehicle\": 0,\n\t\"type\": 1\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/vehicles/",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles",
+								""
+							]
+						},
+						"description": "Route to create a vehicle.\n\nIt need a valid driver_id."
+					},
+					"response": []
+				},
+				{
+					"name": "List trucks today",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/vehicles/truck_today",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles",
+								"truck_today"
+							]
+						},
+						"description": "Route to get a list from trucks that were registered today."
+					},
+					"response": []
+				},
+				{
+					"name": "List trucks week",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/vehicles/truck_week",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles",
+								"truck_week"
+							]
+						},
+						"description": "Route to get a list from trucks that were registered the last 7 days."
+					},
+					"response": []
+				},
+				{
+					"name": "List trucks month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/vehicles/truck_month",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles",
+								"truck_month"
+							]
+						},
+						"description": "Route to get a list from trucks that were registered during the last 30 days."
+					},
+					"response": []
+				}
+			],
+			"description": "Vehicles route's collection.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cd264ce0-b218-4769-b04f-be83895cfb31",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "05b8cd5e-5c5c-4237-b265-f3279efd375e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Routes",
+			"item": [
+				{
+					"name": "Create route",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"driver_id\": 3,\n\t\"origin_latitude\": 25.80,\n\t\"origin_longitude\": 55.89,\n\t\"destination_latitude\": 150.78,\n\t\"destination_longitude\": 220.44\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/routes/",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"routes",
+								""
+							]
+						},
+						"description": "A route to create a \"route\", based on latitude and longitude from origin to destination."
+					},
+					"response": []
+				},
+				{
+					"name": "List origin latitude and longitude",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/routes/list_origin",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"routes",
+								"list_origin"
+							]
+						},
+						"description": "A route to get a list from all the latitude and longitude from the origin of a route."
+					},
+					"response": []
+				},
+				{
+					"name": "List destination latitude and longitude",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/routes/list_destination",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"routes",
+								"list_destination"
+							]
+						},
+						"description": "A route to get a list from all the latitude and longitude from the destination of a route."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
