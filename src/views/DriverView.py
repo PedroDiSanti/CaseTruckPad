@@ -34,35 +34,12 @@ def get(driver_id):
     return custom_response(response, 200)
 
 
-@driver_api.route('/list_loaded', methods=['GET'])
-def list_truck_not_loaded():
-    driver = DriverModel.truck_not_loaded()
-
-    response = driver_schema.dump(driver, many=True).data
-    return custom_response(response, 200)
-
-
-@driver_api.route('/list_owned', methods=['GET'])
-def list_truck_owned():
-    driver = DriverModel.truck_owned()
-
-    # count = 0
-    # drivers = DriverModel.truck_not_loaded()
-    # for _ in drivers:
-        # count += 1
-    # driver = str(count)
-    # return driver
-
-    response = driver_schema.dump(driver, many=True).data
-    return custom_response(response, 200)
-
-
 @driver_api.route('/<int:driver_id>', methods=['PUT'])
 def update(driver_id):
     req_data = request.get_json()
     data, error = driver_schema.load(req_data, partial=True)
     if error:
-        return custom_response(error, 400)
+        return custom_response({'Error': 'Driver not found.'}, 400)
 
     driver = DriverModel.get_one_driver(driver_id)
     driver.update(data)
@@ -74,9 +51,27 @@ def update(driver_id):
 @driver_api.route('/<int:driver_id>', methods=['DELETE'])
 def delete(driver_id):
     driver = DriverModel.get_one_driver(driver_id)
-    driver.delete()
+    if not driver:
+        return custom_response({'Error': 'Driver not found.'}, 400)
 
-    return custom_response({'Sucess': 'Driver deleted with sucess!'}, 204)
+    driver.delete()
+    return custom_response({'Sucess': 'Driver deleted with sucess!'}, 200)
+
+
+@driver_api.route('/list_not_loaded', methods=['GET'])
+def list_truck_not_loaded():
+    driver = DriverModel.truck_not_loaded()
+
+    response = driver_schema.dump(driver, many=True).data
+    return custom_response(response, 200)
+
+
+@driver_api.route('/list_trucks_owned', methods=['GET'])
+def list_truck_owned():
+    driver = DriverModel.truck_owned()
+
+    response = driver_schema.dump(driver, many=True).data
+    return custom_response(response, 200)
 
 
 def custom_response(response, status_code):

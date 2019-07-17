@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 47e4fe5e02f3
+Revision ID: 14ed631689b5
 Revises: 
-Create Date: 2019-07-14 18:42:20.022986
+Create Date: 2019-07-17 18:10:14.093189
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '47e4fe5e02f3'
+revision = '14ed631689b5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,8 +24,8 @@ def upgrade():
     sa.Column('age', sa.Integer(), nullable=False),
     sa.Column('sex', sa.String(length=9), nullable=False),
     sa.Column('cnh', sa.String(length=3), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('route',
@@ -35,8 +35,8 @@ def upgrade():
     sa.Column('origin_longitude', sa.Float(), nullable=False),
     sa.Column('destination_latitude', sa.Float(), nullable=False),
     sa.Column('destination_longitude', sa.Float(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['driver_id'], ['driver.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -47,8 +47,8 @@ def upgrade():
     sa.Column('type', sa.Integer(), nullable=False),
     sa.Column('own_vehicle', sa.Boolean(), nullable=False),
     sa.Column('is_loaded', sa.Boolean(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['driver_id'], ['driver.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

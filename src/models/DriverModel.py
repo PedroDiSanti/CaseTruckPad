@@ -17,8 +17,8 @@ class DriverModel(db.Model):
     age = db.Column(db.Integer, nullable=False)
     sex = db.Column(db.String(9), nullable=False)
     cnh = db.Column(db.String(3), nullable=False)
-    created_at = db.Column(db.DateTime)
-    updated_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, data):
         self.name = data.get('name')
@@ -56,16 +56,16 @@ class DriverModel(db.Model):
 
     @staticmethod
     def truck_not_loaded():
-        return db.session.query(DriverModel.id, DriverModel.name) \
-            .join(VehicleModel, DriverModel.id == VehicleModel.driver_id) \
-            .filter(VehicleModel.is_loaded.is_(False))
+        return db.session.query(DriverModel.id, DriverModel.name). \
+            join(VehicleModel, DriverModel.id == VehicleModel.driver_id). \
+            filter(VehicleModel.is_loaded.is_(False))
 
     @staticmethod
     def truck_owned():
-        return db.session.query(DriverModel.id, DriverModel.name) \
-            .join(VehicleModel, DriverModel.id == VehicleModel.driver_id) \
-            .filter(VehicleModel.own_vehicle.is_(True))\
-            .order_by(DriverModel.id.asc())
+        return db.session.query(DriverModel.id, DriverModel.name). \
+            join(VehicleModel, DriverModel.id == VehicleModel.driver_id). \
+            filter(VehicleModel.own_vehicle.is_(True)). \
+            order_by(DriverModel.id.asc())
 
     def __repr(self):
         return '<id {}>'.format(self.id)

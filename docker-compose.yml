@@ -17,6 +17,10 @@ services:
     container_name: Flask
     restart: always
     build: ./docker-configs
+    environment:
+      - FLASK_ENV=${FLASK_ENV}
+      - FLASK_APP=${FLASK_APP}
+      - DATABASE_URL=${DATABASE_URL}
     ports:
       - 5000:5000
     volumes:

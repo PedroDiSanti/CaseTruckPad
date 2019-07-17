@@ -13,8 +13,8 @@ class VehicleModel(db.Model):
     type = db.Column(db.Integer, nullable=False)
     own_vehicle = db.Column(db.Boolean, default=False, nullable=False)
     is_loaded = db.Column(db.Boolean, default=False, nullable=False)
-    created_at = db.Column(db.DateTime)
-    updated_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, data):
         self.driver_id = data.get('driver_id')
@@ -56,7 +56,23 @@ class VehicleModel(db.Model):
         return db.session.query(VehicleModel). \
             filter(db.cast(VehicleModel.created_at, db.Date) == date.today()).all()
 
-    # TODO: create a method to count how many loaded trucks pass by the terminal by week and month.
+    @staticmethod
+    def get_trucks_week():
+        start_date = datetime.datetime.now() - datetime.timedelta(days=7)
+        end_date = datetime.datetime.now()
+
+        return db.session.query(VehicleModel). \
+            filter(VehicleModel.created_at >= start_date). \
+            filter(VehicleModel.created_at <= end_date)
+
+    @staticmethod
+    def get_trucks_month():
+        start_date = datetime.datetime.now() - datetime.timedelta(days=30)
+        end_date = datetime.datetime.now()
+
+        return db.session.query(VehicleModel). \
+            filter(VehicleModel.created_at >= start_date). \
+            filter(VehicleModel.created_at <= end_date)
 
     def __repr(self):
         return '<id {}>'.format(self.id)

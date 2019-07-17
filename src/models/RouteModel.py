@@ -12,8 +12,8 @@ class RouteModel(db.Model):
     origin_longitude = db.Column(db.Float, nullable=False)
     destination_latitude = db.Column(db.Float, nullable=False)
     destination_longitude = db.Column(db.Float, nullable=False)
-    created_at = db.Column(db.DateTime)
-    updated_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, data):
         self.driver_id = data.get('driver_id')
@@ -48,13 +48,13 @@ class RouteModel(db.Model):
 
     @staticmethod
     def list_origin():
-        return db.session.query(RouteModel.origin_latitude, RouteModel.origin_longitude) \
-            .order_by(RouteModel.origin_latitude, RouteModel.origin_longitude)
+        return db.session.query(RouteModel.id, RouteModel.origin_latitude, RouteModel.origin_longitude). \
+            order_by(RouteModel.origin_latitude, RouteModel.origin_longitude)
 
     @staticmethod
     def list_destination():
-        return db.session.query(RouteModel.destination_latitude, RouteModel.destination_longitude) \
-            .order_by(RouteModel.destination_latitude, RouteModel.destination_longitude)
+        return db.session.query(RouteModel.id, RouteModel.destination_latitude, RouteModel.destination_longitude). \
+            order_by(RouteModel.destination_latitude, RouteModel.destination_longitude)
 
     def __repr(self):
         return '<id {}>'.format(self.id)
