@@ -1,8 +1,10 @@
 python-dotenv
 flask
-flask-sqlalchemy
 psycopg2
+flask-sqlalchemy
 flask-migrate
 flask-script
 marshmallow
-
+pytest
+pytest-cov
+python-coveralls
