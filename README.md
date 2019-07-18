@@ -136,4 +136,4 @@ because Flask is much simpler and easy to learn, use and adapt. A really good Fr
 
 ***
 
-Developer: turtle [Pedro Afonso Rotta Di Santi](https://www.linkedin.com/in/pedro-afonso-rotta-di-santi-8842a017b/) turtle
+Developer: [Pedro Afonso Rotta Di Santi](https://www.linkedin.com/in/pedro-afonso-rotta-di-santi-8842a017b/)
