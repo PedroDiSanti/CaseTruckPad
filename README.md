@@ -1,3 +1,5 @@
+<a href='https://coveralls.io/github/PedroDiSanti/PythonRESTfulAPI'><img src='https://coveralls.io/repos/github/PedroDiSanti/PythonRESTfulAPI/badge.svg' alt='Coverage Status' /></a>
+
 # Python RESTfulAPI
 
 ***
