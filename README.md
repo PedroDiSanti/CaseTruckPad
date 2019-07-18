@@ -1,5 +1,3 @@
-[![Coverage Status](https://coveralls.io/repos/github/PedroDiSanti/PythonRestfulAPI/badge.svg?branch=master)](https://coveralls.io/github/PedroDiSanti/PythonRestfulAPI?branch=master)
-
 # Python RESTfulAPI
 
 ***
