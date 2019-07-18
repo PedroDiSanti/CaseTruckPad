@@ -81,6 +81,30 @@ class RouteTest(unittest.TestCase):
         self.assertEqual(res.status_code, 400)
         self.assertTrue(json_data.get('destination_longitude'))
 
+    def test_vehicle_get_list_origin(self):
+        res = self.client().post('/drivers/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.user))
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client().post('/routes/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.route))
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client().get('/routes/list_origin', headers={'Content-Type': 'application/json'})
+        self.assertEqual(res.status_code, 200)
+
+    def test_vehicle_get_list_destination(self):
+        res = self.client().post('/drivers/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.user))
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client().post('/routes/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.route))
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client().get('/routes/list_destination', headers={'Content-Type': 'application/json'})
+        self.assertEqual(res.status_code, 200)
+
     def tearDown(self):
         with self.app.app_context():
             db.session.remove()

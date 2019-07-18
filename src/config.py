@@ -9,7 +9,7 @@ class Development(object):
 
 class Testing(object):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL_TEST')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

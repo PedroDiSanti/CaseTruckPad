@@ -19,8 +19,8 @@ services:
     build: ./docker-configs
     environment:
       - FLASK_ENV=${FLASK_ENV}
-      - FLASK_APP=${FLASK_APP}
       - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL_TEST=${DATABASE_URL_TEST}
     ports:
       - 5000:5000
     volumes:

@@ -26,9 +26,12 @@ class VehicleTest(unittest.TestCase):
             db.create_all()
 
     def test_vehicles_creation(self):
-        drivers = self.client().post('/drivers/', headers={'Content-Type': 'application/json'}, data=json.dumps(self.user))
+        drivers = self.client().post('/drivers/', headers={'Content-Type': 'application/json'},
+                                     data=json.dumps(self.user))
         self.assertEqual(drivers.status_code, 201)
-        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'}, data=json.dumps(self.vehicle))
+
+        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.vehicle))
         self.assertEqual(res.status_code, 201)
 
     def test_vehicle_creation_with_no_name(self):
@@ -38,9 +41,16 @@ class VehicleTest(unittest.TestCase):
             'own_vehicle': True,
             'is_loaded': True
         }
-        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'}, data=json.dumps(vehicle1))
+
+        drivers = self.client().post('/drivers/', headers={'Content-Type': 'application/json'},
+                                     data=json.dumps(self.user))
+        self.assertEqual(drivers.status_code, 201)
+
+        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(vehicle1))
         json_data = json.loads(res.data)
         self.assertEqual(res.status_code, 400)
+
         self.assertTrue(json_data.get('name'))
 
     def test_vehicle_creation_with_no_type(self):
@@ -50,9 +60,16 @@ class VehicleTest(unittest.TestCase):
             'own_vehicle': True,
             'is_loaded': True
         }
-        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'}, data=json.dumps(vehicle1))
+
+        drivers = self.client().post('/drivers/', headers={'Content-Type': 'application/json'},
+                                     data=json.dumps(self.user))
+        self.assertEqual(drivers.status_code, 201)
+
+        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(vehicle1))
         json_data = json.loads(res.data)
         self.assertEqual(res.status_code, 400)
+
         self.assertTrue(json_data.get('type'))
 
     def test_vehicle_creation_with_no_own_vehicle(self):
@@ -62,9 +79,16 @@ class VehicleTest(unittest.TestCase):
             'type': 2,
             'is_loaded': True
         }
-        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'}, data=json.dumps(vehicle1))
+
+        drivers = self.client().post('/drivers/', headers={'Content-Type': 'application/json'},
+                                     data=json.dumps(self.user))
+        self.assertEqual(drivers.status_code, 201)
+
+        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(vehicle1))
         json_data = json.loads(res.data)
         self.assertEqual(res.status_code, 400)
+
         self.assertTrue(json_data.get('own_vehicle'))
 
     def test_vehicle_creation_with_no_is_loaded(self):
@@ -74,10 +98,53 @@ class VehicleTest(unittest.TestCase):
             'type': 2,
             'own_vehicle': True,
         }
-        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'}, data=json.dumps(vehicle1))
+
+        drivers = self.client().post('/drivers/', headers={'Content-Type': 'application/json'},
+                                     data=json.dumps(self.user))
+        self.assertEqual(drivers.status_code, 201)
+
+        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(vehicle1))
         json_data = json.loads(res.data)
         self.assertEqual(res.status_code, 400)
+
         self.assertTrue(json_data.get('is_loaded'))
+
+    def test_vehicle_get_today(self):
+        res = self.client().post('/drivers/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.user))
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.vehicle))
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client().get('/vehicles/truck_today', headers={'Content-Type': 'application/json'})
+        self.assertEqual(res.status_code, 200)
+
+    def test_vehicle_get_week(self):
+        res = self.client().post('/drivers/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.user))
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.vehicle))
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client().get('/vehicles/truck_week', headers={'Content-Type': 'application/json'})
+        self.assertEqual(res.status_code, 200)
+
+    def test_vehicle_get_month(self):
+        res = self.client().post('/drivers/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.user))
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client().post('/vehicles/', headers={'Content-Type': 'application/json'},
+                                 data=json.dumps(self.vehicle))
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client().get('/vehicles/truck_month', headers={'Content-Type': 'application/json'})
+        self.assertEqual(res.status_code, 200)
 
     def tearDown(self):
         with self.app.app_context():
